@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, finalize, take } from 'rxjs/operators';
 import { Apollo, gql } from 'apollo-angular';
 import { SearchResult } from './result.model';
@@ -26,11 +26,17 @@ export const SEARCH_MOVIES = gql`
   providedIn: 'root'
 })
 export class SearchService {
+  loadingSearch: Subject<boolean>;
+  movieSearchResult: Subject<SearchResult>;
 
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {
+    this.loadingSearch = new Subject();
+    this.movieSearchResult = new Subject();
+  }
 
-  searchTitles(search: string): Observable<SearchResult | string> {
-    return this.apollo
+  searchTitles(search: string, page?: number, perPage?: number): void {
+    this.loadingSearch.next(true);
+    this.apollo
       .watchQuery<SearchResult>({
         query: SEARCH_MOVIES,
         variables: {
@@ -39,28 +45,14 @@ export class SearchService {
             "genre": null
           },
           "pagination": {
-            "page": null,
-            "perPage": null
+            "page": page,
+            "perPage": perPage
           }
         }
       })
-      .valueChanges.pipe(
-        take(1),
-        map(({ data }) => data),
-        catchError(this.handleError<string>('searchTitles', ''))
-      );
-  }
-
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.log('operation:', operation);
-
-      // send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+      .valueChanges.subscribe((searchResult) => {
+        this.loadingSearch.next(false);
+        this.movieSearchResult.next(searchResult.data);
+      });
   }
 }

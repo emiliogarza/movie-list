@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SearchService } from '../search.service';
 import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
+import { BaseComponent } from '../../common/base';
 
 @Component({
   selector: 'search-box',
@@ -11,7 +12,7 @@ import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '
   styleUrl: './search-box.component.scss'
 })
 export class SearchBoxComponent {
-  subs = new Subscription();
+  
   searchForm: FormGroup = this.fb.group({
     searchQuery: [null, Validators.required]
   })
@@ -20,23 +21,11 @@ export class SearchBoxComponent {
     private fb: UntypedFormBuilder,
     private searchService: SearchService
   ) {}
-
-  ngOnInit() {
-  }
   
   onSearch() {
     let query = this.searchForm.controls['searchQuery'].value;
     if (query) {
-      this.subs.add(
-        this.searchService.searchTitles(query).subscribe(
-          result => console.log(result),
-          error => console.log(error)
-        )
-      )  
+      this.searchService.searchTitles(query); 
     }
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe();
   }
 }

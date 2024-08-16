@@ -8,6 +8,8 @@ export interface SearchResult {
 export interface SearchMovie {
     id: string;
     title: string;
+    posterUrl: string;
+    summary: string;
 }
 
 export interface SearchPaginationDetails {

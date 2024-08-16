@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BaseComponent } from './common/base';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +11,16 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent extends BaseComponent {
   title = 'movie-recs-1';
-  private subs = new Subscription();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   ngOnInit() {
     this.subs.add(
       this.http.get<any>("https://0kadddxyh3.execute-api.us-east-1.amazonaws.com/auth/token").subscribe(
-        response => localStorage.setItem("token", response.token),
-        error => console.log(error)
-      )
-    )
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe();
+        response => localStorage.setItem("token", response.token))
+    );
   }
 }

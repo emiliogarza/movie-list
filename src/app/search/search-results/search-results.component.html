@@ -1,1 +1,38 @@
-<p>search-results works!</p>
+<div *ngIf="loading" class="px-4 py-5 divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl">
+  <div class="animate-pulse flex space-x-4">
+    <div class="rounded-full bg-slate-200 h-10 w-10"></div>
+    <div class="flex-1 space-y-6 py-1">
+      <div class="space-y-3">
+        <div class="grid grid-cols-3 gap-4">
+          <div class="h-2 bg-slate-200 rounded col-span-2"></div>
+        </div>
+        <div class="h-2 bg-slate-200 rounded"></div>
+        <div class="h-2 bg-slate-200 rounded"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul *ngIf="movies && movies.length > 0" role="list" class="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl">
+    <li *ngFor="let movie of movies" class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
+      <div class="flex min-w-0 gap-x-4">
+        <img class="h-12 w-12 flex-none rounded-full bg-gray-50" [src]="movie.posterUrl" alt="">
+        <div class="min-w-0 flex-auto">
+          <p class="text-sm font-semibold leading-6 text-gray-900 text-left">
+            <a href="#">
+              <span class="absolute inset-x-0 -top-px bottom-0"></span>
+              {{ movie.title }}
+            </a>
+          </p>
+          <p class="mt-1 flex text-xs leading-5 text-gray-500 text-left">
+            {{ movie.summary }}
+          </p>
+        </div>
+      </div>
+      <div class="flex shrink-0 items-center gap-x-4">
+        <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+        </svg>
+      </div>
+    </li>
+</ul>
