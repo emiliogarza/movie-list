@@ -15,10 +15,11 @@ import { SearchQuery } from '../result.model';
 export class SearchBoxComponent extends BaseComponent {
   showFilters: boolean;
   queryObject: SearchQuery;
+  genreOptions: Set<string>;
   
   searchForm: FormGroup = this.fb.group({
     searchQuery: [null, Validators.required],
-    genre: [null]
+    genre: [""]
   })
 
   constructor(
@@ -30,7 +31,15 @@ export class SearchBoxComponent extends BaseComponent {
 
   ngOnInit() {
     this.subs.add(
-      this.searchService.movieSearchResult.subscribe(results => this.showFilters = true)
+      this.searchService.movieSearchResult.subscribe((results) => {
+        this.genreOptions = new Set();
+        results.movies.nodes.forEach((movie) => {
+          movie.genres.forEach(g => {
+            this.genreOptions.add(g.title);
+          })
+        });
+        this.showFilters = true;
+      })
     );
     this.subs.add(
       this.searchService.query.subscribe(query => this.queryObject = query)
@@ -39,11 +48,16 @@ export class SearchBoxComponent extends BaseComponent {
   
   onSearch() {
     let searchQuery = this.searchForm.controls['searchQuery'].value;
+    let genre = this.searchForm.controls['genre'].value;
     if (searchQuery) {
       if (this.queryObject) {
         this.queryObject.query = searchQuery;
+        this.queryObject.genre = genre;
       } else {
-        this.queryObject = { query: searchQuery }
+        this.queryObject = { 
+          query: searchQuery, 
+          genre: genre
+        }
       }
       this.searchService.searchTitles(this.queryObject);
     }

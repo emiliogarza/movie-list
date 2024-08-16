@@ -10,7 +10,10 @@ export const SEARCH_MOVIES = gql`
         id
         title,
         posterUrl,
-        summary
+        summary,
+        genres {
+          title
+        }
       }
       pagination {
         page

@@ -10,6 +10,7 @@ export interface SearchMovie {
     title: string;
     posterUrl: string;
     summary: string;
+    genres: Genre[];
 }
 
 export interface SearchPaginationDetails {
@@ -23,4 +24,8 @@ export class SearchQuery {
     genre?: string;
     page?: number;
     perPage?: number;
+}
+
+export interface Genre {
+    title: string;
 }
