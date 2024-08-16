@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
-import { catchError, map, finalize, take } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { Apollo, gql } from 'apollo-angular';
-import { SearchResult } from './result.model';
+import { SearchQuery, SearchResult } from './result.model';
 
 export const SEARCH_MOVIES = gql`
   query SearchMoviesQuery($pagination: PaginationInput, $where: MovieFilterInput) {
@@ -26,31 +25,34 @@ export const SEARCH_MOVIES = gql`
   providedIn: 'root'
 })
 export class SearchService {
-  loadingSearch: Subject<boolean>;
-  movieSearchResult: Subject<SearchResult>;
+  public query: Subject<SearchQuery>;
+  public loadingSearch: Subject<boolean>;
+  public movieSearchResult: Subject<SearchResult>;
 
   constructor(private apollo: Apollo) {
+    this.query = new Subject();
     this.loadingSearch = new Subject();
     this.movieSearchResult = new Subject();
   }
 
-  searchTitles(search: string, page?: number, perPage?: number): void {
+  searchTitles(searchQuery: SearchQuery): void {
     this.loadingSearch.next(true);
     this.apollo
       .watchQuery<SearchResult>({
         query: SEARCH_MOVIES,
         variables: {
           "where": {
-            "search": search,
-            "genre": null
+            "search": searchQuery.query,
+            "genre": searchQuery.genre
           },
           "pagination": {
-            "page": page,
-            "perPage": perPage
+            "page": searchQuery.page,
+            "perPage": searchQuery.perPage
           }
         }
       })
       .valueChanges.subscribe((searchResult) => {
+        this.query.next(searchQuery);
         this.loadingSearch.next(false);
         this.movieSearchResult.next(searchResult.data);
       });

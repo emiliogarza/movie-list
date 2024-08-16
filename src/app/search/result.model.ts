@@ -17,3 +17,10 @@ export interface SearchPaginationDetails {
     perPage: number;
     totalPages: number;
 }
+
+export class SearchQuery {
+    query: string;
+    genre?: string;
+    page?: number;
+    perPage?: number;
+}
