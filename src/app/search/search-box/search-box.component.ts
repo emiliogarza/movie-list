@@ -53,6 +53,7 @@ export class SearchBoxComponent extends BaseComponent {
       if (this.queryObject) {
         this.queryObject.query = searchQuery;
         this.queryObject.genre = genre;
+        this.queryObject.page = 1;
       } else {
         this.queryObject = { 
           query: searchQuery, 

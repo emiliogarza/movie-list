@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SearchService } from '../search.service';
 import { BaseComponent } from '../../common/base';
-import { SearchMovie, SearchPaginationDetails, SearchResult } from '../result.model';
+import { SearchMovie } from '../result.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './search-results.component.scss'
 })
 export class SearchResultsComponent extends BaseComponent {
-    paginationDetails: SearchPaginationDetails;
     movies: SearchMovie[];
     loading: boolean;
 
@@ -21,7 +20,6 @@ export class SearchResultsComponent extends BaseComponent {
     }
     ngOnInit() {
       this.subs.add(this.searchService.movieSearchResult.subscribe((results) => {
-        this.paginationDetails = results.movies.pagination;
         this.movies = results.movies.nodes;
       }));
       this.subs.add(this.searchService.loadingSearch.subscribe(loading => this.loading = loading));
