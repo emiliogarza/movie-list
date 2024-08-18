@@ -30,6 +30,7 @@ export class SearchBoxComponent extends BaseComponent {
   }
 
   ngOnInit() {
+    this.searchOnLoad();
     this.subs.add(
       this.searchService.movieSearchResult.subscribe((results) => {
         this.genreOptions = new Set();
@@ -60,7 +61,22 @@ export class SearchBoxComponent extends BaseComponent {
           genre: genre
         }
       }
+      sessionStorage.setItem("searchQuery", JSON.stringify(this.queryObject));
       this.searchService.searchTitles(this.queryObject);
     }
+  }
+
+  searchOnLoad() {
+    let query = sessionStorage.getItem("searchQuery");
+    if (query) {
+      let queryObject: SearchQuery = JSON.parse(query);
+      this.mapToForm(queryObject);
+      this.searchService.searchTitles(queryObject);
+    }
+  }
+
+  mapToForm(queryObject: SearchQuery) {
+    this.searchForm.controls['searchQuery'].setValue(queryObject.query);
+    this.searchForm.controls['genre'].setValue(queryObject.genre);
   }
 }

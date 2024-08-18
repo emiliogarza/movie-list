@@ -1,27 +1,18 @@
-# MovieRecs1
+# Movie List
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+Loved making this project, my favorite aspect was how it has a feature to pin movies that your interested in watching. I know any movie lover has a watched list, so providing that functionality is a useful thing given the site's subject. 
 
-## Development server
+## Pleased with
+I'm most pleased with that I was able to use simple RxJs Subjects to allow the various components to subscribe to the state of the form and the results, that way I added have to pass anything around with @Input. Feels more scalable that way.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Also, I really enjoyed using GraphQL to easily tailor the properties I would like displayed on the Search Results.
 
-## Code scaffolding
+## Future Features?
+Given more time, I think some improvements would be:
+1. Better Page URLs for better SEO benefits, formulate titles in URLs.
+2. Create a Reviews Feature, where you can comment how you felt about the movie.
+3. Have a page with latest movies being featured
+4. Work on some of the UI to make it cleaner and more attractive.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Deployed site.
+You can find the deployed site at [this link](https://karma-runner.github.io) to give it a shot yourself.

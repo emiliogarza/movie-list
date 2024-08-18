@@ -22,14 +22,14 @@ export class DetailsComponent extends BaseComponent {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
+    this.subs.add(this.route.paramMap.subscribe((params) => {
       this.movieId = params.get('id');
       if (this.movieId) {
         this.searchService.searchMovieDetail(this.movieId);
       }
-    });
-    this.searchService.movieDetailResult.subscribe(movieData => {
+    }));
+    this.subs.add(this.searchService.movieDetailResult.subscribe(movieData => {
       this.movie = movieData.movie;
-    })
+    }));
   }
 }
