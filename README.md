@@ -1,5 +1,4 @@
 # Movie List
-
 Loved making this project, my favorite aspect was how it has a feature to pin movies that your interested in watching. I know any movie lover has a watched list, so providing that functionality is a useful thing given the site's subject. 
 
 ## Pleased with
@@ -15,4 +14,4 @@ Given more time, I think some improvements would be:
 4. Work on some of the UI to make it cleaner and more attractive.
 
 ## Deployed site.
-You can find the deployed site at [this link](https://karma-runner.github.io) to give it a shot yourself.
+You can find the deployed site at [this link](https://emiliosmovielist.netlify.app/) to give it a shot yourself.
