@@ -10,6 +10,8 @@ export interface SearchMovie {
     title: string;
     posterUrl: string;
     summary: string;
+    duration: string;
+    rating: string;
     genres: Genre[];
 }
 
@@ -28,4 +30,25 @@ export class SearchQuery {
 
 export interface Genre {
     title: string;
+}
+
+export interface DetailResult {
+    movie: Movie;
+}
+
+export interface Movie {
+    id: string;
+    title: string;
+    posterUrl: string;
+    summary: string;
+    duration: string;
+    directors: string[];
+    mainActors: string[];
+    datePublished: string;
+    rating: string;
+    ratingValue: number;
+    bestRating: number;
+    worstRating: number;
+    writers: string[];
+    genres: Genre[];
 }
