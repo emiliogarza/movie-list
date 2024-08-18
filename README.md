@@ -9,7 +9,7 @@ Also, I really enjoyed using GraphQL to easily tailor the properties I would lik
 ## Future Features?
 Given more time, I think some improvements would be:
 1. Better Page URLs for better SEO benefits, formulate titles in URLs.
-2. Create a Reviews Feature, where you can comment how you felt about the movie.
+2. Create a Reviews Feature, where you can comment how you felt about the movie. Would build a Netlify Function and Supabase Database.
 3. Have a page with latest movies being featured
 4. Work on some of the UI to make it cleaner and more attractive.
 
