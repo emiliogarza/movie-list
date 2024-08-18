@@ -12,6 +12,8 @@
             <div class="lg:col-start-2">
             <h2 id="features-heading" class="font-medium text-gray-500"><span class="font-semibold">Duration</span> {{ movie.duration | durationTimeStamp }} <span class="font-semibold">Rated</span> {{ movie.rating }}</h2>
             <p class="mt-4 text-4xl font-bold tracking-tight text-gray-900">{{ movie.title }}</p>
+            <button *ngIf="!inWatchLater" (click)="addToWatchLater()" class="mt-3 inline-flex w-full items-center justify-center rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300 sm:w-auto">Pin to Watch Later 📌</button>
+            <button *ngIf="inWatchLater" (click)="removeFromWatchLater()" class="mt-3 inline-flex w-full items-center justify-center rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300 sm:w-auto">Remove from Watch Later 📌</button>
             <p class="mt-4 text-gray-500">{{ movie.summary }}</p>
     
             <dl class="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 text-sm sm:grid-cols-2">
@@ -37,3 +39,4 @@
         </section>
     </div>
 </section>
+<watch-later></watch-later>

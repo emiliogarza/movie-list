@@ -52,3 +52,8 @@ export interface Movie {
     writers: string[];
     genres: Genre[];
 }
+
+export interface WatchListItem {
+    title: string;
+    id: string;
+}

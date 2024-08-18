@@ -1,0 +1,16 @@
+<div class="overflow-hidden rounded-t bg-gray-100 shadow-2xl fixed bottom-0 right-0">
+    <a href="#" (click)="expand(); $event.preventDefault();" class="text-center">
+        <div class="px-4 pt-5 sm:p-6 w-48">
+            <h4 class="text-center">Watch Later</h4>
+        </div>
+    </a>
+    <div *ngIf="open" class="px-4 pb-5 sm:pr-6 sm:pb-6 sm:pl-6">
+        <ul class="-mb-2 max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800" id="options" role="listbox">
+            <a *ngFor="let watchItem of watchList" href="#" (click)="routeToDetails(watchItem.id); $event.preventDefault();">
+                <li class="rounded-md px-4 py-2 hover:bg-cyan-600 hover:text-white" id="option-1" role="option" tabindex="-1">
+                    {{ watchItem.title }}
+                </li>
+            </a>
+          </ul>
+    </div>
+</div>
